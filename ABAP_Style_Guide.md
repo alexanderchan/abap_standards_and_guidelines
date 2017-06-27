@@ -99,6 +99,7 @@ endif. " End of for all entries check.
 - Group as much of the selects and function reads outside of the main loop by using for all entries and then reading afterwards with
 - Use field symbols for reading and looping
 - Read internal tables with the addition `WITH TABLE KEY`
+- Note that inserts into hashed tables are slower than into standard tables, so read directly into a hashed or assign from a standard table after the duplicate keys are removed when possible
 
 
 ## OpenSQL
@@ -164,32 +165,7 @@ ls_stuff = ...
 
 
 ```
-- If we know the netweaver stack is high enough, inline declarations (except for in OpenSQL) are preferred for the same reasons as declare as close as possible.  In addition, data types don't need to be known and updated whenever variables change
 
-```ABAP
-" Old style
-field-symbols: <ls_mara> type mara.
-read table lt_mara assigning <ls_mara>.
-
-data: ls_person_details type zcl_class=>ty_person_details.
-call method zcl_class=>get_person_details(
-  importing
-    es_person_details = ls_person_details
-  )
-
-" New style - shorter and less brittle
-read table lt_mara assigning field-symbol(<ls_mara>).
-zcl_class=>get_person_details(
-  importing
-  es_person_details = data(ls_person_details)
-  )
-
-```
-
-
-
-
-```
 
 ## Useful tools
 
