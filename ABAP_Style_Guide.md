@@ -25,6 +25,14 @@ A mostly reasonable and pretty opinionated approach to ABAP.
 |    l   | Local variables        | `ls_mara`                                                        |
 |    m   | Class member variables | `mt_cached_data` Member variables are kept with the instance     |
 
+### Second character
+
+| character | Usage                  | Example / Notes                                                  |
+|:------:|------------------------|--------------------------------------------------------          |
+|    t   | table     | `lt_plvar`                                                       |
+|    v   | single variable        | `lv_position` |
+|    s   | Structure/work area       | `ls_mara` a table structure                                                       |
+
 
 ## Performance
 
