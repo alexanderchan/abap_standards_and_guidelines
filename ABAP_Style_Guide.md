@@ -33,6 +33,44 @@ A mostly reasonable and pretty opinionated approach to ABAP.
 |    v   | single variable        | `lv_position` |
 |    s   | Structure/work area       | `ls_mara` a table structure                                                       |
 
+### Constants
+
+- All constants should be declared other than sign = 'I' and option = 'EQ'. 
+- It is useful to group similar constants by starting the name with the type
+- Use long descriptive constants and make them globally available at the class level for re-use if they are used accross multiple methods or in other classes
+
+```abap
+" Bad
+ lv_material_type = '0001'.
+ lv_object_type = lc_p.
+ lv_country = lc_ch.
+ lv_language = 'E'.
+ 
+ if lv_is_bad = 'X'.
+  "...
+ elseif lv_is_good = ''.
+ 
+" Good
+lv_material_type = c_mat_type_finished_good.
+lv_object_type = c_otype_person.
+lv_country = c_country_switzerland.
+lv_language = c_default_language_english.
+
+if lv_is_good = abap_true.
+  "...
+endif.
+
+data: lr_country_range type range of land1,
+      ls_country_range like line of lr_country_range.
+      
+      ls_country_range-sign = 'I'.
+      ls_country_range-option = 'EQ'. 
+      ls_country_range-low = c_country_switzerland.
+      append ls_country_range to lr_country_range.         
+
+```
+
+
 
 ## Performance
 
