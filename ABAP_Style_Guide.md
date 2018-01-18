@@ -204,6 +204,22 @@ ls_stuff = ...
 
 ```
 
+## Gateway/oData guidelines
+
+Use get converted keys whenever possible as it links the technical names together without having to read tables.
+
+```abap
+" good
+data: ls_entity like er_entity.
+io_tech_request_context->get_converted_keys(
+        IMPORTING
+          es_key_values = ls_entity ).
+```
+
+```abap
+"todo bad
+
+```
 
 ## Useful tools
 
