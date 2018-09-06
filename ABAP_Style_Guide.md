@@ -148,7 +148,7 @@ clear: lt_people. " Free up the memory if lt_people is no longer used
 
 " Bad
 loop at lt_people assigning field-symbol(<ls_people>).
-   insert <ls_people> into lt_people_h.
+   insert <ls_people> into table lt_people_h.
 endloop.
 ```
 
