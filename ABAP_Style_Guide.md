@@ -1,5 +1,5 @@
 
-# Convergent IS ABAP Style Guide
+# ConvergentIS ABAP Style Guide
 
 A mostly reasonable and pretty opinionated approach to ABAP.
 
