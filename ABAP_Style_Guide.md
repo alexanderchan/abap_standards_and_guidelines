@@ -137,7 +137,20 @@ endif. " End of for all entries check.
 - Group as much of the selects and function reads outside of the main loop by using for all entries and then reading afterwards with
 - Use field symbols for reading and looping
 - Read internal tables with the addition `WITH TABLE KEY`
-- Note that inserts into hashed tables are slower than into standard tables, so read directly into a hashed or assign from a standard table after the duplicate keys are removed when possible
+- Note that inserts into hashed tables are slower than into standard tables, so read directly into a hashed or assign from a standard table after the duplicate keys are removed when possible.   Ideally assign the deduplicated data directly to the hashed table in a single assignment to take advantage of the kernel operation which is much faster than line by line insertion.
+
+```abap
+delete adjacent duplicates from lt_people comparing pernr.
+
+" Good
+lt_people_h = lt_people[]. " This is a kernel operation and optimizes hashed key generation
+clear: lt_people. " Free up the memory if lt_people is no longer used
+
+" Bad
+loop at lt_people assigning field-symbol(<ls_people>).
+   insert <ls_people> into lt_people_h.
+endloop.
+```
 
 
 ## OpenSQL
